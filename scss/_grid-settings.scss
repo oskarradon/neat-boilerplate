@@ -1,7 +1,10 @@
 @import "neat-helpers";
 
 // Display visual grid
-$visual-grid: false !global;
+$visual-grid: true !global;
 
 // Visual grid colour
 $visual-grid-color: #d5eefb !global;
+
+$column: modular-scale(3, 1em, $minor-second);
+$gutter: modular-scale(1, 1em, $minor-second);
