@@ -34,7 +34,7 @@ gulp.task('jade', function() {
 
 // CSS tasks
 gulp.task('css', function() {
-	return gulp.src('scss/*.scss')
+	return gulp.src('scss/**/*.scss')
 	// .pipe(sourcemaps.init())
 	.pipe(sass({ style: 'compressed', 
 		noCache: true,
