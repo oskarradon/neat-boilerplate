@@ -1,18 +1,19 @@
 @import "bourbon";
+@import "grid-settings";
 @import "neat";
 
-$visual-grid : true;
+body {
+	margin: 0;
+	padding: 20px;
+}
 
 .container {
 	@include outer-container;
 	.project {
 		background: tomato;
 		@include span-columns(6);
-		@include omega();
+		@include omega(2n);
 		margin-bottom: 20px;
 		height: 100px;
-		@include media(769px) {
-       		@include span-columns(4);
-     	}
 	}
 }
