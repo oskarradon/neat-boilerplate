@@ -9,8 +9,7 @@ var sass                    = require('gulp-sass');
 var sourcemaps              = require('gulp-sourcemaps');
 var autoprefixer            = require('gulp-autoprefixer');
 var cssmin                  = require('gulp-cssmin');
-var bourbon                 = require('node-bourbon').includePaths;
-var neat                    = require('bourbon-neat').includePaths;
+var neat                    = require('node-neat').includePaths;
 var concat                  = require('gulp-concat');
 var uglify                  = require('gulp-uglify');
 var del                     = require('del');
@@ -38,7 +37,7 @@ gulp.task('css', function() {
 	// .pipe(sourcemaps.init())
 	.pipe(sass({ style: 'compressed', 
 		noCache: true,
-		includePaths: [ bourbon, neat ] }))
+		includePaths: neat }))
 	// .pipe(sourcemaps.write())
 	.pipe(autoprefixer())
 	.pipe(cssmin())
