@@ -2,11 +2,6 @@
 @import "grid-settings";
 @import "neat";
 
-body {
-	margin: 0;
-	padding: 20px;
-}
-
 .container {
 	@include outer-container;
 	.project {
@@ -14,6 +9,6 @@ body {
 		@include span-columns(6);
 		@include omega(2n);
 		margin-bottom: 20px;
-		height: 100px;
+		height: 45vw;
 	}
 }
