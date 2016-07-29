@@ -12,7 +12,8 @@ var cssmin                  = require('gulp-cssmin');
 var neat                    = require('node-neat').includePaths;
 var concat                  = require('gulp-concat');
 var uglify                  = require('gulp-uglify');
-var del                     = require('del');
+// var del                     = require('del');
+var rename					= require('gulp-rename');
 var browserSync             = require('browser-sync');
 var reload                  = browserSync.reload;
 
@@ -25,15 +26,15 @@ var reload                  = browserSync.reload;
 
 // Jade tasks
 gulp.task('jade', function() {
-	return gulp.src('*.jade')
+	return gulp.src('src/jade/**/*.jade')
 	.pipe(jade({ pretty: true }))
-	.pipe(gulp.dest(''))
+	.pipe(gulp.dest('dist/'))
 });
 
 
 // CSS tasks
 gulp.task('css', function() {
-	return gulp.src('scss/**/*.scss')
+	return gulp.src('src/scss/**/*.scss')
 	// .pipe(sourcemaps.init())
 	.pipe(sass({ style: 'compressed', 
 		noCache: true,
@@ -41,36 +42,41 @@ gulp.task('css', function() {
 	// .pipe(sourcemaps.write())
 	.pipe(autoprefixer())
 	.pipe(cssmin())
-	.pipe(gulp.dest('css'))
+	.pipe(rename({
+        suffix: '.min'
+    }))
+	.pipe(gulp.dest('dist/css'))
 });
 
 // JS tasks
-gulp.task('cleanJs', function() {
-	del(['js/scripts.min.js']);
-});
+// gulp.task('cleanJs', function() {
+// 	del(['dist/js/scripts.min.js']);
+// });
 
 gulp.task('js', function() {
-	return gulp.src('js/scripts.js')
+	return gulp.src('src/js/**/*.js')
 	.pipe(uglify())
-	.pipe(concat('scripts.min.js'))
-	.pipe(gulp.dest('js/'))
+	.pipe(rename({
+		suffix: '.min'
+	}))
+	.pipe(gulp.dest('dist/js/'))
 });
 
 // Watch files for changes
 gulp.task('watch', ['browser-sync'], function() {
 	gulp.watch('*.html', reload);
-	gulp.watch('scss/**/*', ['css', reload]);
+	gulp.watch('*.scss', ['css', reload]);
 	gulp.watch('*.jade', ['jade']);
-	gulp.watch('scripts.js', ['cleanJs', 'js']);
+	gulp.watch('*.js', ['js']);
 });
 
 gulp.task('browser-sync', function() {
-	browserSync.init(['css/*', 'js/*'], {
+	browserSync.init(['src/css/*', 'src/js/*'], {
 		server: {
-			baseDir: ""
+			baseDir: "dist/"
 		}
 	});
 });
 
 // Default task
-gulp.task('default', ['css', 'jade', 'cleanJs', 'js', 'watch', 'browser-sync']);
+gulp.task('default', ['css', 'jade', 'js', 'watch', 'browser-sync']);
