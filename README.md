@@ -1,4 +1,3 @@
-# Neat Practice
-Just practicing the Bourbon Neat CSS grid :)
+# Bourbon Neat Jade SCSS Boilerplate
 
-This will probably become my boilerplate for all future projects using gulp, sass, jade, and neat.
+Everything is set up in `dist` and `src` directories, sourcemaps isn't working YET but everything else is golden✨
