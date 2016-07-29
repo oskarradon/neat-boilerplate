@@ -20,7 +20,7 @@ body {
 		padding: 0 10px;
 	}
 	.project {
-		background: tomato;
+		background: red;
 		margin-bottom: 20px;
 		height: 45vw;
 		@include media($medium-viewport) {
