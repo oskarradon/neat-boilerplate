@@ -1,6 +1,5 @@
-// -------------------------------------------------------------------------
 // VARIABLES
-// -------------------------------------------------------------------------
+
 
 
 var gulp                    = require('gulp');
@@ -12,16 +11,15 @@ var cssmin                  = require('gulp-cssmin');
 var neat                    = require('node-neat').includePaths;
 var concat                  = require('gulp-concat');
 var uglify                  = require('gulp-uglify');
-// var del                     = require('del');
 var rename					= require('gulp-rename');
 var browserSync             = require('browser-sync');
 var reload                  = browserSync.reload;
 
 
 
-// -------------------------------------------------------------------------
+
 // TASKS
-// -------------------------------------------------------------------------
+
 
 
 // Jade tasks
@@ -33,13 +31,11 @@ gulp.task('jade', function() {
 
 
 // CSS tasks
-gulp.task('css', function() {
+gulp.task('scss', function() {
 	return gulp.src('src/scss/**/*.scss')
-	// .pipe(sourcemaps.init())
 	.pipe(sass({ style: 'compressed', 
 		noCache: true,
 		includePaths: neat }))
-	// .pipe(sourcemaps.write())
 	.pipe(autoprefixer())
 	.pipe(cssmin())
 	.pipe(rename({
@@ -48,11 +44,7 @@ gulp.task('css', function() {
 	.pipe(gulp.dest('dist/css'))
 });
 
-// JS tasks
-// gulp.task('cleanJs', function() {
-// 	del(['dist/js/scripts.min.js']);
-// });
-
+// JS task
 gulp.task('js', function() {
 	return gulp.src('src/js/**/*.js')
 	.pipe(uglify())
@@ -64,14 +56,14 @@ gulp.task('js', function() {
 
 // Watch files for changes
 gulp.task('watch', ['browser-sync'], function() {
-	gulp.watch('*.html', reload);
-	gulp.watch('*.scss', ['css', reload]);
-	gulp.watch('*.jade', ['jade']);
-	gulp.watch('*.js', ['js']);
+	gulp.watch('dist/**/*.html', reload);
+	gulp.watch('src/scss/**/*.scss', ['scss', reload]);
+	gulp.watch('src/jade/**/*.jade', ['jade']);
+	gulp.watch('src/js/**/*.js', ['js']);
 });
 
 gulp.task('browser-sync', function() {
-	browserSync.init(['src/css/*', 'src/js/*'], {
+	browserSync.init(['dist/css/**/*.css', 'dist/js/**/*.js'], {
 		server: {
 			baseDir: "dist/"
 		}
@@ -79,4 +71,4 @@ gulp.task('browser-sync', function() {
 });
 
 // Default task
-gulp.task('default', ['css', 'jade', 'js', 'watch', 'browser-sync']);
+gulp.task('default', ['scss', 'jade', 'js', 'watch', 'browser-sync']);
