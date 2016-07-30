@@ -1,5 +1,5 @@
 @import "bourbon";
-@import "grid-settings";
+@import "_/grid-settings";
 @import "neat";
 
 
@@ -20,7 +20,7 @@ body {
 		padding: 0 10px;
 	}
 	.project {
-		background: red;
+		background: tomato;
 		margin-bottom: 20px;
 		height: 45vw;
 		@include media($medium-viewport) {
