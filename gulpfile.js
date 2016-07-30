@@ -1,7 +1,5 @@
 // VARIABLES
 
-
-
 var gulp                    = require('gulp');
 var jade                    = require('gulp-jade');
 var sass                    = require('gulp-sass');
@@ -16,13 +14,9 @@ var browserSync             = require('browser-sync');
 var reload                  = browserSync.reload;
 
 
-
-
 // TASKS
 
-
-
-// Jade tasks
+// Jade task
 gulp.task('jade', function() {
 	return gulp.src('src/jade/**/*.jade')
 	.pipe(jade({ pretty: true }))
@@ -30,12 +24,12 @@ gulp.task('jade', function() {
 });
 
 
-// CSS tasks
+// CSS task
 gulp.task('scss', function() {
-	return gulp.src('src/scss/**/*.scss')
+	return gulp.src(['src/scss/**/*.scss', '!src/scss/_/**/*.scss'])
 	.pipe(sass({ style: 'compressed', 
 		noCache: true,
-		includePaths: neat }))
+		includePaths: neat}))
 	.pipe(autoprefixer())
 	.pipe(cssmin())
 	.pipe(rename({
@@ -62,6 +56,7 @@ gulp.task('watch', ['browser-sync'], function() {
 	gulp.watch('src/js/**/*.js', ['js']);
 });
 
+// Spin up development server
 gulp.task('browser-sync', function() {
 	browserSync.init(['dist/css/**/*.css', 'dist/js/**/*.js'], {
 		server: {
