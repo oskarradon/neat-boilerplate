@@ -1,36 +1,105 @@
-@import "bourbon";
-@import "_/grid-settings";
-@import "neat";
-
-
-$first-breakpoint-value: 400px;
-$second-breakpoint-value: 700px;
-
-$medium-viewport: new-breakpoint(min-width $first-breakpoint-value max-width $second-breakpoint-value);
-$large-viewport: new-breakpoint(min-width $second-breakpoint-value + 1);
-
-body {
-	margin: 0px;
-	padding: 0px;
+@font-face {
+	font-family: 'Asea';
+	src: url('../assets/fonts/AseaR.ttf') format('truetype'),
+	url('../assets/fonts/AseaR.woff') format('woff');
 }
 
-.container {
-	@include outer-container;
-	@include media($medium-viewport) {
-		padding: 0 10px;
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	font-family: 'Asea', Georgia, 'Times New Roman', Times, serif;
+}
+
+header {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 999;
+	h2.title {
+		font-style: italic;
+		font-weight: 400;
+		margin: 50px 0 15px;
 	}
-	.project {
-		background: tomato;
-		margin-bottom: 20px;
-		height: 45vw;
-		@include media($medium-viewport) {
-    		@include span-columns(6);
-    		@include omega(2n);
-  		}
-  		@include media($large-viewport) {
-    		@include span-columns(4);
-    		@include omega(3n);
-			height: 30vw;
-  		}
+	h3 {
+		margin: 0px;
 	}
+}
+
+a, a:visited, a:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.one { 
+	background: url(../assets/img/1.jpg) no-repeat center center fixed;
+}
+
+.two {
+	background: url(../assets/img/2.jpg) no-repeat center center fixed;
+	opacity: .3;
+	// z-index: 2;
+}
+
+.bg { 
+	width: 100%;
+	height: 100%; 
+	background-size: cover;
+	position: absolute;
+}
+
+img {
+	position: absolute;
+}
+
+.img-container {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	p {
+		text-align: center;
+		animation: blink 15s ease-in-out alternate infinite;
+	}
+}
+
+@keyframes blink {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+.merlin {
+	height: 200px;
+	margin: 30vh auto 0;
+	position: relative;
+	filter: blur(3px);
+	transition: .5s;
+	&:hover {
+		filter: blur(0px);
+		transition: .5s;
+	}
+}
+
+.burst {
+	width: 50px;
+	left: calc(100vw - 50px);
+	@media (min-width: 900px) {
+		width: 300px;
+		left: calc(100vw - 300px);
+	}
+}
+
+.sun {
+	height: 100px;
+	top: calc(100vh - 120px);
+	left: 20px;
+	animation: pulse 1s ease-in-out alternate infinite;
+}
+
+@keyframes pulse {
+	from { transform: scale(1); }
+	to { transform: scale(1.1); }
 }

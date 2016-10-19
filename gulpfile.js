@@ -6,10 +6,11 @@ var sass                    = require('gulp-sass');
 var sourcemaps              = require('gulp-sourcemaps');
 var autoprefixer            = require('gulp-autoprefixer');
 var cssmin                  = require('gulp-cssmin');
-var neat                    = require('node-neat').includePaths;
+// var neat                    = require('node-neat').includePaths;
 var concat                  = require('gulp-concat');
 var uglify                  = require('gulp-uglify');
-var rename					= require('gulp-rename');
+var rename					        = require('gulp-rename');
+var babel                   = require('gulp-babel');
 var browserSync             = require('browser-sync');
 var reload                  = browserSync.reload;
 
@@ -28,8 +29,7 @@ gulp.task('jade', function() {
 gulp.task('scss', function() {
 	return gulp.src(['src/scss/**/*.scss', '!src/scss/_/**/*.scss'])
 	.pipe(sass({ style: 'compressed', 
-		noCache: true,
-		includePaths: neat}))
+		noCache: true}))
 	.pipe(autoprefixer())
 	.pipe(cssmin())
 	.pipe(rename({
@@ -41,6 +41,9 @@ gulp.task('scss', function() {
 // JS task
 gulp.task('js', function() {
 	return gulp.src('src/js/**/*.js')
+	.pipe(babel({
+		presets: ['es2015']
+	}))
 	.pipe(uglify())
 	.pipe(rename({
 		suffix: '.min'
